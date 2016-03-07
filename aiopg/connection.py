@@ -2,6 +2,7 @@ import asyncio
 import errno
 import sys
 import traceback
+import uuid
 import warnings
 import weakref
 
@@ -232,6 +233,7 @@ class Connection:
     @asyncio.coroutine
     def _cursor_impl(self, name=None, cursor_factory=None,
                      scrollable=None, withhold=False):
+        name = name or str(uuid.uuid1())
         if cursor_factory is None:
             impl = self._conn.cursor(name=name,
                                      scrollable=scrollable, withhold=withhold)
